@@ -19,9 +19,9 @@
   "author": "Tomasz Gwoździk <tomasz.gwozdzik@outlook.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tgwozdzik/calendar.git"
+    "url": "https://github.com/tgwozdzik/react-calendar.git"
   },
-  "bugs": "https://github.com/tgwozdzik/calendar/issues",
+  "bugs": "https://github.com/tgwozdzik/react-calendar/issues",
   "license": "MIT",
   "config": {
     "port": 8000,
