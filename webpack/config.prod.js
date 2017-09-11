@@ -1,42 +1,37 @@
-const Extract = require('extract-text-webpack-plugin');
-const Webpack = require('webpack');
+const extract = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const path    = require('path');
 
 const publicPath = process.env.npm_package_config_public_path;
 
 module.exports = {
   entry: [
       'babel-polyfill',
-      './src/index.js',
-      './styles/index.scss',
+      path.resolve(__dirname, '../src/index.js'),
   ],
   output: {
-    path: '../lib',
-    filename: '[name].js',
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'react-calendar.min.js',
     publicPath: publicPath,
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.scss']
   },
   stats: {
     colors: true
   },
-  noParse: /\.min\.js$/,
   module: {
+    noParse: /\.min\.js$/,
     loaders: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.jsx?$/,
+        include: path.resolve(__dirname, '../src'),
         loader: 'babel-loader',
-        query: {
-          comments: false,
-          compact: true,
-          presets: [
-            'es2015',
-            'react',
-            'stage-0',
-          ],
-        },
       },
       {
         test: /\.?css$/,
-        loader: Extract.extract([
+        include: path.resolve(__dirname, '../styles'),
+        loader: extract.extract([
           'css',
           'postcss',
           'sass',
@@ -45,26 +40,18 @@ module.exports = {
       {
         test: /\.(jpg|png|ttf|svg|woff|woff2|eot)$/,
         loader: 'file',
-        query: {
+        options: {
           name: 'assets/[hash].[ext]',
         },
       }
     ],
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [
-          autoprefixer
-        ]
-      }
-    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
           booleans:      true,

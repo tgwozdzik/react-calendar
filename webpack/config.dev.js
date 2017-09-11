@@ -1,4 +1,3 @@
-const ip           = require('ip');
 const html         = require('html-webpack-plugin');
 const webpack      = require('webpack');
 const path         = require('path');
@@ -23,21 +22,12 @@ module.exports = {
     publicPath: publicPath,
   },
   module: {
+    noParse: /\.min\.js$/,
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          comments: false,
-          compact: true,
-          presets: [
-            'es2015',
-            'react',
-            'react-hmre',
-            'stage-0',
-          ],
-        },
+        loader: 'babel-loader'
       },
       {
         test: /\.?css$/,
@@ -52,7 +42,7 @@ module.exports = {
       {
         test: /\.(jpg|png|ttf|svg|woff|woff2|eot)$/,
         loader: 'file',
-        query: {
+        options: {
           name: 'assets/[hash].[ext]',
         },
       }
