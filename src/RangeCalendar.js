@@ -541,7 +541,7 @@ const RangeCalendar = createReactClass({
             onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
             onMouseEnter={type !== 'both' ? this.onDatePanelEnter : undefined}
           >
-            {prevButton ? <div onClick={this.goMonth.bind(this, -1)}>{prevButton}</div> : null}
+            {prevButton ? <div className={`${prefixCls}-prev-button`} onClick={this.goMonth.bind(this, -1)}>{prevButton}</div> : null}
             <CalendarPart
               {...props}
               {...newProps}
@@ -582,7 +582,7 @@ const RangeCalendar = createReactClass({
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
               enableNext
             />
-            {nextButton ? <div onClick={this.goMonth.bind(this, 1)}>{nextButton}</div> : null}
+            {nextButton ? <div className={`${prefixCls}-next-button`} onClick={this.goMonth.bind(this, 1)}>{nextButton}</div> : null}
           </div>
           <div className={cls}>
             {props.renderFooter()}
