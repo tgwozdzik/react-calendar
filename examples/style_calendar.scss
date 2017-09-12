@@ -75,53 +75,6 @@
             }
 
             tbody > tr {
-              //td[class="rc-calendar-cell"] + td[class~="rc-calendar-selected-day"] {
-              //  &:last-of-type {
-              //    &:after {
-              //      width: 15px;
-              //      height: 30px;
-              //      content: " ";
-              //      display: block;
-              //      position: absolute;
-              //      z-index: 20;
-              //      top: 0;
-              //      background-color: rgba(#3598FE, 0.2);
-              //      right: 0;
-              //      border-radius: 0 6px 6px 0;
-              //      pointer-events: none;
-              //    }
-              //  }
-              //}
-
-              //td[class~="rc-calendar-last-month-cell"] + td[class~="rc-calendar-selected-day"] {
-              //  &:last-of-type{
-              //    &:before {
-              //      width: 15px;
-              //      height: 30px;
-              //      content: " ";
-              //      display: block;
-              //      position: absolute;
-              //      z-index: 20;
-              //      top: 0;
-              //      background-color: rgba(#3598FE, 0.2);
-              //      right: 0;
-              //      border-radius: 0 6px 6px 0;
-              //      pointer-events: none;
-              //    }
-              //  }
-              //}
-
-
-              //td[class~="rc-calendar-selected-day"] + td[class~="rc-calendar-in-range-cell"],
-              //td[class~="rc-calendar-selected-day"] + td[class~="rc-calendar-selected-day"] {
-              //
-              //}
-              //
-              //td[class~="rc-calendar-selected-day"] ~ td[class~="rc-calendar-selected-day"],
-              //td[class~="rc-calendar-in-range-cell"] ~ td[class~="rc-calendar-selected-day"] {
-              //  background: linear-gradient(to left, #FFFFFF 50%, rgba(#3598FE, 0.2) 50%);
-              //}
-
               td.rc-calendar-in-range-cell:last-of-type {
                 border-radius: 0 6px 6px 0;
               }
