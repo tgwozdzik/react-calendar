@@ -7,6 +7,7 @@ import RangeCalendar from '../src/RangeCalendar';
 import enUS from '../src/locale/en_US';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import './style_calendar';
+import './simple_styles';
 // import 'rc-calendar/assets/index.less';
 // import 'rc-time-picker/assets/index.css';
 
@@ -132,6 +133,8 @@ export default class DateRangePicker extends React.Component {
     const state = this.state;
     const calendar = (
       <RangeCalendar
+        prevButton={"<Test"}
+        nextButton={">Test"}
         showWeekNumber={false}
         dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now.clone().add(1, 'months')]}

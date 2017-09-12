@@ -199,7 +199,6 @@ const RangeCalendar = createReactClass({
     let hoverValue = [];
     const { selectedValue, firstSelectedValue } = this.state;
     const { type } = this.props;
-    console.log(this.props, this.state);
 
     if (type === 'start' && selectedValue[1]) {
       hoverValue = this.compare(value, selectedValue[1]) < 0 ?
@@ -239,6 +238,16 @@ const RangeCalendar = createReactClass({
     if (this.isAllowedDateAndTime(selectedValue)) {
       this.props.onOk(this.state.selectedValue);
     }
+  },
+
+  goMonth(direction) {
+    const startValue = this.state.value[0] && this.state.value[0].clone();
+    const endValue = this.state.value[1] && this.state.value[1].clone();
+
+    startValue.add(direction, 'months');
+    endValue.add(direction, 'months');
+
+    this.setState({value: [startValue, endValue]});
   },
 
   onStartInputSelect(...oargs) {
@@ -458,7 +467,7 @@ const RangeCalendar = createReactClass({
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
-      showToday, type,
+      showToday, type, prevButton, nextButton
     } = props;
     const {
       hoverValue,
@@ -485,8 +494,6 @@ const RangeCalendar = createReactClass({
 
     let placeholder1;
     let placeholder2;
-
-    // console.log(this.props, this.state);
 
     if (dateInputPlaceholder) {
       if (Array.isArray(dateInputPlaceholder)) {
@@ -534,6 +541,7 @@ const RangeCalendar = createReactClass({
             onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
             onMouseEnter={type !== 'both' ? this.onDatePanelEnter : undefined}
           >
+            {prevButton ? <div onClick={this.goMonth.bind(this, -1)}>{prevButton}</div> : null}
             <CalendarPart
               {...props}
               {...newProps}
@@ -574,6 +582,7 @@ const RangeCalendar = createReactClass({
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
               enableNext
             />
+            {nextButton ? <div onClick={this.goMonth.bind(this, 1)}>{nextButton}</div> : null}
           </div>
           <div className={cls}>
             {props.renderFooter()}
