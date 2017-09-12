@@ -21,6 +21,9 @@ module.exports = {
     filename: '[name].js',
     publicPath: publicPath,
   },
+  resolve: {
+      extensions: ['.js', '.jsx', '.scss']
+  },
   module: {
     noParse: /\.min\.js$/,
     loaders: [
@@ -30,13 +33,32 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.?css$/,
-        include: path.resolve(__dirname, '../styles'),
-        loaders: [
-          'style-loader',
-          'css-loader?sourceMap',
-          'postcss-loader',
-          'sass-loader?sourceMap',
+        test: /\.s?css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+                sourceMap: true,
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+                sourceMap: true,
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+                sourceMap: true,
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+                sourceMap: true,
+            }
+          }
         ]
       },
       {

@@ -64,6 +64,8 @@ const DateTBody = createReactClass({
     const dateClass = `${prefixCls}-date`;
     const todayClass = `${prefixCls}-today`;
     const selectedClass = `${prefixCls}-selected-day`;
+    const selectedRangeFirstClass = `${prefixCls}-selected-range-first-day`;
+    const selectedRangeLastClass = `${prefixCls}-selected-range-last-day`;
     const selectedDateClass = `${prefixCls}-selected-date`;  // do not move with mouse operation
     const inRangeClass = `${prefixCls}-in-range-cell`;
     const lastMonthDayClass = `${prefixCls}-last-month-cell`;
@@ -185,6 +187,20 @@ const DateTBody = createReactClass({
 
         if (selected) {
           cls += ` ${selectedClass}`;
+
+          const rangeValue = hoverValue.length ? hoverValue : selectedValue;
+          const startValue = rangeValue[0];
+          const endValue = rangeValue[1];
+
+          if(!!startValue && !!endValue && !isSameDay(startValue, endValue)) {
+            if(isSameDay(current, startValue)) {
+              cls += ` ${selectedRangeFirstClass}`;
+            }
+
+            if(isSameDay(current, endValue)) {
+              cls += ` ${selectedRangeLastClass}`;
+            }
+          }
         }
 
         if (disabled) {

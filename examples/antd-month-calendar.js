@@ -39,7 +39,6 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    console.log(`DatePicker change: ${value && value.format(format)}`);
     this.setState({
       value,
     });
@@ -108,11 +107,9 @@ const Test = React.createClass({
 });
 
 function onStandaloneSelect(value) {
-  console.log('month-calendar select', (value && value.format(format)));
 }
 
 function onStandaloneChange(value) {
-  console.log('month-calendar change', (value && value.format(format)));
 }
 
 function disabledDate(value) {

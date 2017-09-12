@@ -29,12 +29,12 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.?css$/,
+        test: /\.s?css$/,
         include: path.resolve(__dirname, '../styles'),
         loader: extract.extract([
-          'css',
-          'postcss',
-          'sass',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
         ]),
       },
       {

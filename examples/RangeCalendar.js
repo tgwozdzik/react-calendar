@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Picker from '../src/Picker';
 import RangeCalendar from '../src/RangeCalendar';
-import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
+import './style_calendar';
 // import 'rc-calendar/assets/index.less';
 // import 'rc-time-picker/assets/index.css';
 
@@ -55,7 +55,6 @@ function disabledDate(current) {
 }
 
 function disabledTime(time, type) {
-  console.log('disabledTime', time, type);
   if (type === 'start') {
     return {
       disabledHours() {
@@ -106,93 +105,42 @@ function isValidRange(v) {
 }
 
 function onStandaloneChange(value) {
-  console.log('onChange');
-  console.log(value[0] && format(value[0]), value[1] && format(value[1]));
 }
 
 function onStandaloneSelect(value) {
-  console.log('onSelect');
-  console.log(format(value[0]), format(value[1]));
 }
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      value: [],
-      hoverValue: [],
-    };
-  },
+export default class DateRangePicker extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+        value: [],
+        hoverValue: [],
+    }
+  }
 
   onChange(value) {
-    console.log('onChange', value);
     this.setState({ value });
-  },
+  }
 
   onHoverChange(hoverValue) {
     this.setState({ hoverValue });
-  },
+  }
 
   render() {
     const state = this.state;
     const calendar = (
       <RangeCalendar
-        hoverValue={state.hoverValue}
-        onHoverChange={this.onHoverChange}
         showWeekNumber={false}
         dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now.clone().add(1, 'months')]}
-        locale={cn ? zhCN : enUS}
+        locale={enUS}
         disabledTime={disabledTime}
         timePicker={timePickerElement}
       />
     );
-    return (
-      <Picker
-        value={state.value}
-        onChange={this.onChange}
-        animation="slide-up"
-        calendar={calendar}
-      >
-        {
-          ({ value }) => {
-            return (<span>
-                <input
-                  placeholder="please select"
-                  style={{ width: 350 }}
-                  disabled={state.disabled}
-                  readOnly
-                  className="ant-calendar-picker-input ant-input"
-                  value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
-                />
-                </span>);
-          }
-        }
-      </Picker>);
-  },
-});
 
-ReactDOM.render(
-  <div>
-    <h2>calendar</h2>
-    <div style={{ margin: 10 }}>
-      <RangeCalendar
-        showToday={false}
-        showWeekNumber
-        dateInputPlaceholder={['start', 'end']}
-        locale={cn ? zhCN : enUS}
-        showOk={false}
-        showClear
-        format={formatStr}
-        onChange={onStandaloneChange}
-        onSelect={onStandaloneSelect}
-        disabledDate={disabledDate}
-        timePicker={timePickerElement}
-        disabledTime={disabledTime}
-      />
-    </div>
-    <br />
-
-    <div style={{ margin: 20 }}>
-      <Test />
-    </div>
-  </div>, document.getElementById('__react-content'));
+    return calendar;
+  }
+}

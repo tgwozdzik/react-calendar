@@ -35,7 +35,6 @@ defaultCalendarValue.add(-1, 'month');
 const timePickerElement = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
 
 function disabledTime(date) {
-  console.log('disabledTime', date);
   if (date && (date.date() === 15)) {
     return {
       disabledHours() {
@@ -79,7 +78,6 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    console.log('DatePicker change: ', (value && value.format(format)));
     this.setState({
       value,
     });
@@ -184,13 +182,9 @@ const Test = React.createClass({
 });
 
 function onStandaloneSelect(value) {
-  console.log('onStandaloneSelect');
-  console.log(value && value.format(format));
 }
 
 function onStandaloneChange(value) {
-  console.log('onStandaloneChange');
-  console.log(value && value.format(format));
 }
 
 

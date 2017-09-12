@@ -88,7 +88,6 @@ const Test = React.createClass({
   },
 
   onChange(field, value) {
-    console.log('onChange', field, value && value.format(getFormat(SHOW_TIME)));
     this.setState({
       [field]: value,
     });

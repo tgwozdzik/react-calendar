@@ -1,0 +1,241 @@
+.rc-calendar-hidden {
+  display: none;
+}
+
+.rc-calendar {
+  display: flex;
+  outline: none;
+
+  & > .rc-calendar-panel {
+    display: flex;
+    outline: none;
+    padding: 20px;
+
+    & > .rc-calendar-date-panel {
+      display: flex;
+
+      & > .rc-calendar-range-left,
+      & > .rc-calendar-range-right {
+        &:before {
+          font-size: 11px;
+          color: #79808F;
+          letter-spacing: 0.20px;
+          line-height: 14px;
+          font-weight: 700;
+        }
+
+        .rc-calendar-input {
+          border: 1px solid #D0D9E5;
+          border-radius: 6px;
+          padding: 6px 16px;
+          font-size: 14px;
+          color: #79808F;
+          margin-top: 6px;
+          width: 100%;
+        }
+
+        .rc-calendar-header {
+          display: flex;
+          justify-content: center;
+          margin: 35px 0 5px 0;
+
+          .rc-calendar-my-select {
+            & > a {
+              &:last-child {
+                font-weight: bold;
+                font-size: 16px;
+                color: #3B4059;
+              }
+            }
+          }
+        }
+
+        .rc-calendar-header {
+          .rc-calendar-prev-month-btn {
+            position: absolute;
+            top: 0;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+          }
+        }
+
+        .rc-calendar-body {
+          table {
+            border-collapse: separate;
+            border-spacing: 0 8px;
+
+            thead > tr {
+              & > th {
+                font-size: 9px;
+                color: #79808F;
+                text-align: center;
+                text-transform: uppercase;
+              }
+            }
+
+            tbody > tr {
+              //td[class="rc-calendar-cell"] + td[class~="rc-calendar-selected-day"] {
+              //  &:last-of-type {
+              //    &:after {
+              //      width: 15px;
+              //      height: 30px;
+              //      content: " ";
+              //      display: block;
+              //      position: absolute;
+              //      z-index: 20;
+              //      top: 0;
+              //      background-color: rgba(#3598FE, 0.2);
+              //      right: 0;
+              //      border-radius: 0 6px 6px 0;
+              //      pointer-events: none;
+              //    }
+              //  }
+              //}
+
+              //td[class~="rc-calendar-last-month-cell"] + td[class~="rc-calendar-selected-day"] {
+              //  &:last-of-type{
+              //    &:before {
+              //      width: 15px;
+              //      height: 30px;
+              //      content: " ";
+              //      display: block;
+              //      position: absolute;
+              //      z-index: 20;
+              //      top: 0;
+              //      background-color: rgba(#3598FE, 0.2);
+              //      right: 0;
+              //      border-radius: 0 6px 6px 0;
+              //      pointer-events: none;
+              //    }
+              //  }
+              //}
+
+
+              //td[class~="rc-calendar-selected-day"] + td[class~="rc-calendar-in-range-cell"],
+              //td[class~="rc-calendar-selected-day"] + td[class~="rc-calendar-selected-day"] {
+              //
+              //}
+              //
+              //td[class~="rc-calendar-selected-day"] ~ td[class~="rc-calendar-selected-day"],
+              //td[class~="rc-calendar-in-range-cell"] ~ td[class~="rc-calendar-selected-day"] {
+              //  background: linear-gradient(to left, #FFFFFF 50%, rgba(#3598FE, 0.2) 50%);
+              //}
+
+              td.rc-calendar-in-range-cell:last-of-type {
+                border-radius: 0 6px 6px 0;
+              }
+
+              td.rc-calendar-in-range-cell:first-of-type {
+                border-radius: 6px 0 0 6px;
+              }
+
+              & > td {
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                font-size: 14px;
+                color: #79808F;
+                letter-spacing: -0.11px;
+                text-align: center;
+                padding: 0 7.5px;
+                position: relative;
+
+                & > div {
+                  width: 30px;
+                  height: 30px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+
+                &.rc-calendar-selected-range-first-day {
+                  &:after {
+                    width: 15px;
+                    height: 30px;
+                    content: " ";
+                    display: block;
+                    position: absolute;
+                    left: 30px;
+                    top: 0;
+                    background-color: rgba(53, 152, 254, 0.2);
+                    pointer-events: none;
+                  }
+
+                  &:last-of-type:after {
+                    border-radius: 0 6px 6px 0;
+                  }
+                }
+
+                &.rc-calendar-selected-range-last-day {
+                  &:before {
+                    width: 15px;
+                    height: 30px;
+                    content: " ";
+                    display: block;
+                    position: absolute;
+                    z-index: 20;
+                    top: 0;
+                    background-color: rgba(#3598FE, 0.2);
+                    left: 0;
+                    border-radius: 0 6px 6px 0;
+                    pointer-events: none;
+                  }
+
+                  &:first-of-type:before {
+                    border-radius: 6px 0 0 6px;
+                  }
+                }
+
+                &.rc-calendar-next-month-btn-day {
+                  display: none;
+                }
+
+                &.rc-calendar-last-month-cell {
+                  pointer-events: none;
+
+                  & > div {
+                    opacity: 0;
+                  }
+                }
+
+                &.rc-calendar-selected-day {
+                  & > div  {
+                    background-color: #3598FE;
+                    border-radius: 6px;
+                    color: #FFFFFF;
+                  }
+                }
+
+                &.rc-calendar-in-range-cell {
+                  background-color: rgba(#3598FE, 0.2);
+
+                  &:last-of-type {
+                    background: rgba(#3598FE, 0.2);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      & > .rc-calendar-range-left {
+        &:before {
+          content: "OD";
+        }
+      }
+
+      & > .rc-calendar-range-middle {
+        width: 50px;
+        opacity: 0;
+      }
+
+      & > .rc-calendar-range-right {
+        &:before {
+          content: "DO";
+        }
+      }
+    }
+  }
+}

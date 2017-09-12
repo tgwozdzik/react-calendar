@@ -24,17 +24,14 @@ const App = React.createClass({
       } else {
         mode = e;
       }
-      console.log('change to: ', mode);
       this.setState({
         [key]: mode,
       });
     }.bind(this);
   },
   handlePanelChange(...args) {
-    console.log('on panel change', ...args);
   },
   handleRangePanelChange(...args) {
-    console.log('on range panel change', ...args);
   },
   render() {
     return (

@@ -199,6 +199,8 @@ const RangeCalendar = createReactClass({
     let hoverValue = [];
     const { selectedValue, firstSelectedValue } = this.state;
     const { type } = this.props;
+    console.log(this.props, this.state);
+
     if (type === 'start' && selectedValue[1]) {
       hoverValue = this.compare(value, selectedValue[1]) < 0 ?
         [value, selectedValue[1]] : [value];
@@ -483,6 +485,8 @@ const RangeCalendar = createReactClass({
 
     let placeholder1;
     let placeholder2;
+
+    // console.log(this.props, this.state);
 
     if (dateInputPlaceholder) {
       if (Array.isArray(dateInputPlaceholder)) {

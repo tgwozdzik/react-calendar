@@ -29,7 +29,6 @@ const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
 function onSelect(value) {
-  console.log('select', value.format(format));
 }
 
 const App = React.createClass({

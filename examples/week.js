@@ -63,7 +63,6 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    console.log('DatePicker change: ', (value && value.format(format)));
     this.setState({
       value,
     });
