@@ -77,7 +77,8 @@ const CalendarPart = createReactClass({
           showClear={false}
           selectedValue={selectedValue[index]}
           onChange={onInputSelect}
-          onFocus={onInputFocus}
+          onFocus={onInputFocus.bind(null, true)}
+          onBlur={onInputFocus.bind(null, false)}
         />
         <div style={{ outline: 'none' }}>
           <CalendarHeader

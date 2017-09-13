@@ -464,16 +464,16 @@ const RangeCalendar = createReactClass({
     return month.isSameOrBefore(value[0], 'month');
   },
 
-  onStartInputFocus() {
+  onStartInputFocus(isFocused) {
     const {props} = this;
 
-    if(props.onInputFocus) props.onInputFocus('start');
+    if(props.onInputFocus) props.onInputFocus('start', isFocused);
   },
 
-  onEndInputFocus() {
+  onEndInputFocus(isFocused) {
     const {props} = this;
 
-    if(props.onInputFocus) props.onInputFocus('end');
+    if(props.onInputFocus) props.onInputFocus('end', isFocused);
   },
 
   render() {
