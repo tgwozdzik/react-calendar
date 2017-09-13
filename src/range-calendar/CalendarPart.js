@@ -38,6 +38,7 @@ const CalendarPart = createReactClass({
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
       onInputSelect, enablePrev, enableNext,
+      onInputFocus
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -76,6 +77,7 @@ const CalendarPart = createReactClass({
           showClear={false}
           selectedValue={selectedValue[index]}
           onChange={onInputSelect}
+          onFocus={onInputFocus}
         />
         <div style={{ outline: 'none' }}>
           <CalendarHeader

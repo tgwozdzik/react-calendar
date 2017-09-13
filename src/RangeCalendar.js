@@ -88,6 +88,7 @@ const RangeCalendar = createReactClass({
     onValueChange: PropTypes.func,
     onHoverChange: PropTypes.func,
     onPanelChange: PropTypes.func,
+    onInputFocus: PropTypes.func,
     format: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     onClear: PropTypes.func,
     type: PropTypes.any,
@@ -105,6 +106,7 @@ const RangeCalendar = createReactClass({
       onHoverChange: noop,
       onPanelChange: noop,
       disabledTime: noop,
+      onInputFocus: noop,
       showToday: true,
     };
   },
@@ -462,6 +464,18 @@ const RangeCalendar = createReactClass({
     return month.isSameOrBefore(value[0], 'month');
   },
 
+  onStartInputFocus() {
+    const {props} = this;
+
+    if(props.onInputFocus) props.onInputFocus('start');
+  },
+
+  onEndInputFocus() {
+    const {props} = this;
+
+    if(props.onInputFocus) props.onInputFocus('end');
+  },
+
   render() {
     const { props, state } = this;
     const {
@@ -556,6 +570,7 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onStartInputSelect}
               onValueChange={this.onStartValueChange}
               onPanelChange={this.onStartPanelChange}
+              onInputFocus={this.onStartInputFocus}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               enablePrev
@@ -575,6 +590,7 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onEndInputSelect}
               onValueChange={this.onEndValueChange}
               onPanelChange={this.onEndPanelChange}
+              onInputFocus={this.onEndInputFocus}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}

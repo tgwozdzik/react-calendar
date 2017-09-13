@@ -108,7 +108,7 @@ const DateInput = createReactClass({
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
-    const { locale, prefixCls, placeholder } = props;
+    const { locale, prefixCls, placeholder, onFocus } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (<div className={`${prefixCls}-input-wrap`}>
       <div className={`${prefixCls}-date-input-wrap`}>
@@ -119,6 +119,7 @@ const DateInput = createReactClass({
           disabled={props.disabled}
           placeholder={placeholder}
           onChange={this.onInputChange}
+          onFocus={onFocus}
         />
       </div>
       {props.showClear ? <a
