@@ -3,6 +3,7 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
+import moment from 'moment';
 import { getTitleString, getTodayTime } from '../util/';
 
 function isSameDay(one, two) {
@@ -73,6 +74,8 @@ const DateTBody = createReactClass({
     const disabledClass = `${prefixCls}-disabled-cell`;
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
+    const firstOfMonth = `${prefixCls}-first-day-of-month`;
+    const endOfMonth = `${prefixCls}-last-day-of-month`;
     const month1 = value.clone();
     month1.date(1);
     const day = month1.day();
@@ -158,6 +161,14 @@ const DateTBody = createReactClass({
           // keyboard change value, highlight works
           selected = true;
           isActiveWeek = true;
+        }
+
+        if(current.date() === moment(current).startOf('month').date() && !isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
+          cls += ` ${firstOfMonth}`;
+        }
+
+        if(current.date() === moment(current).endOf('month').date() && !isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
+          cls += ` ${endOfMonth}`;
         }
 
         if (isSameDay(current, selectedValue)) {
