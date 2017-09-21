@@ -32,7 +32,6 @@ const Picker = React.createClass({
     };
   },
   onHoverChange(hoverValue) {
-    console.log(hoverValue);
     this.setState({ hoverValue });
   },
   render() {

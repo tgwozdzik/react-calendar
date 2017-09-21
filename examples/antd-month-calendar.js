@@ -118,8 +118,7 @@ function disabledDate(value) {
 }
 
 function onMonthCellContentRender(value) {
-  // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
-  return `${value.month() + 1}月`;
+
 }
 
 ReactDOM.render(
