@@ -481,7 +481,8 @@ const RangeCalendar = createReactClass({
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
-      showToday, type, prevButton, nextButton
+      showToday, type, prevButton, nextButton,
+      inputImage
     } = props;
     const {
       hoverValue,
@@ -559,6 +560,7 @@ const RangeCalendar = createReactClass({
             <CalendarPart
               {...props}
               {...newProps}
+              inputImage={inputImage}
               hoverValue={hoverValue}
               direction="left"
               disabledTime={this.disabledStartTime}
@@ -580,6 +582,7 @@ const RangeCalendar = createReactClass({
             <CalendarPart
               {...props}
               {...newProps}
+              inputImage={inputImage}
               hoverValue={hoverValue}
               direction="right"
               format={this.getFormat()}

@@ -23,7 +23,7 @@ const CalendarPart = createReactClass({
     onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,
     enableNext: PropTypes.any,
-    enablePrev: PropTypes.any,
+    enablePrev: PropTypes.any
   },
   render() {
     const props = this.props;
@@ -38,7 +38,7 @@ const CalendarPart = createReactClass({
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
       onInputSelect, enablePrev, enableNext,
-      onInputFocus
+      inputImage, onInputFocus
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -79,6 +79,7 @@ const CalendarPart = createReactClass({
           onChange={onInputSelect}
           onFocus={onInputFocus.bind(null, true)}
           onBlur={onInputFocus.bind(null, false)}
+          inputImage={inputImage}
         />
         <div style={{ outline: 'none' }}>
           <CalendarHeader

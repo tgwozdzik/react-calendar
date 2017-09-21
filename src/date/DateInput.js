@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import classnames from 'classnames';
 
 const DateInput = createReactClass({
   propTypes: {
@@ -108,10 +109,11 @@ const DateInput = createReactClass({
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
-    const { locale, prefixCls, placeholder, onFocus, onBlur } = props;
+    const { locale, prefixCls, placeholder, onFocus, onBlur, inputImage } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (<div className={`${prefixCls}-input-wrap`}>
-      <div className={`${prefixCls}-date-input-wrap`}>
+      <div className={classnames(`${prefixCls}-date-input-wrap`, {'input-image': !!inputImage})}>
+        {inputImage ? <div>{inputImage}</div> : null}
         <input
           ref={this.saveDateInput}
           className={`${prefixCls}-input ${invalidClass}`}
