@@ -13,7 +13,10 @@
     "lib"
   ],
   "homepage": "",
-  "author": "Tomasz Gwoździk <tomasz.gwozdzik@outlook.com>",
+  "author": "Tomasz Gwoździk <tgwozdzik@psmm.pl>",
+  "publishConfig": {
+    "registry": "https://npm.app.psmm.pl"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tgwozdzik/react-calendar.git"
