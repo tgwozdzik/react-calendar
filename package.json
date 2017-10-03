@@ -2,6 +2,7 @@
   "name": "@psmm/react-calendar",
   "version": "0.1.10",
   "description": "Calendar component for React",
+  "private": true,
   "keywords": [
     "react",
     "calendar",
