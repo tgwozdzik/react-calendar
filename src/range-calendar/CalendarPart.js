@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import CalendarHeader from '../calendar/CalendarHeader';
@@ -25,6 +26,7 @@ const CalendarPart = createReactClass({
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any
   },
+
   render() {
     const props = this.props;
     const {
@@ -38,7 +40,8 @@ const CalendarPart = createReactClass({
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
       onInputSelect, enablePrev, enableNext,
-      inputImage, onInputFocus
+      inputImage, onInputFocus, inputTimeImage,
+      onTimeInputFocus
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -63,6 +66,7 @@ const CalendarPart = createReactClass({
         defaultOpenValue: value,
         value: selectedValue[index],
       });
+
     return (
       <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
         <DateInput
@@ -78,8 +82,11 @@ const CalendarPart = createReactClass({
           selectedValue={selectedValue[index]}
           onChange={onInputSelect}
           onFocus={onInputFocus.bind(null, true)}
+          onTimeInputFocus={onTimeInputFocus.bind(null, true)}
           onBlur={onInputFocus.bind(null, false)}
+          onTimeInputBlur={onTimeInputFocus.bind(null, false)}
           inputImage={inputImage}
+          inputTimeImage={inputTimeImage}
         />
         <div style={{ outline: 'none' }}>
           <CalendarHeader

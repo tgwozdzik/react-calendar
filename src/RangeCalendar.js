@@ -89,6 +89,7 @@ const RangeCalendar = createReactClass({
     onHoverChange: PropTypes.func,
     onPanelChange: PropTypes.func,
     onInputFocus: PropTypes.func,
+    onTimeInputFocus: PropTypes.func,
     format: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     onClear: PropTypes.func,
     type: PropTypes.any,
@@ -470,6 +471,18 @@ const RangeCalendar = createReactClass({
     if(props.onInputFocus) props.onInputFocus('start', isFocused);
   },
 
+  onStartTimeInputFocus(isFocused) {
+    const {props} = this;
+
+    if(props.onTimeInputFocus) props.onTimeInputFocus('start-time', isFocused);
+  },
+
+  onEndTimeInputFocus(isFocused) {
+    const {props} = this;
+
+    if(props.onTimeInputFocus) props.onTimeInputFocus('end-time', isFocused);
+  },
+
   onEndInputFocus(isFocused) {
     const {props} = this;
 
@@ -482,7 +495,7 @@ const RangeCalendar = createReactClass({
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
       showToday, type, prevButton, nextButton,
-      inputImage
+      inputImage, inputTimeImage
     } = props;
     const {
       hoverValue,
@@ -561,6 +574,7 @@ const RangeCalendar = createReactClass({
               {...props}
               {...newProps}
               inputImage={inputImage}
+              inputTimeImage={inputTimeImage}
               hoverValue={hoverValue}
               direction="left"
               disabledTime={this.disabledStartTime}
@@ -573,6 +587,7 @@ const RangeCalendar = createReactClass({
               onValueChange={this.onStartValueChange}
               onPanelChange={this.onStartPanelChange}
               onInputFocus={this.onStartInputFocus}
+              onTimeInputFocus={this.onStartTimeInputFocus}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               enablePrev
@@ -594,6 +609,7 @@ const RangeCalendar = createReactClass({
               onValueChange={this.onEndValueChange}
               onPanelChange={this.onEndPanelChange}
               onInputFocus={this.onEndInputFocus}
+              onTimeInputFocus={this.onEndTimeInputFocus}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}

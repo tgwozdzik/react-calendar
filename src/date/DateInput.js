@@ -4,6 +4,7 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
+import TimeInput from 'react-time-input';
 
 const DateInput = createReactClass({
   propTypes: {
@@ -106,24 +107,46 @@ const DateInput = createReactClass({
     this.dateInputInstance = dateInput;
   },
 
+  onTimeChange(newTime) {
+    const {props} = this;
+
+    if(props.value.format("HH:mm") === newTime) return;
+
+    props.onChange(
+      moment(props.value.format("YYYY-MM-DD") + " " + (newTime || '00:00'), "YYYY-MM-DD HH:mm")
+    );
+  },
+
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
-    const { locale, prefixCls, placeholder, onFocus, onBlur, inputImage } = props;
+    const { locale, prefixCls, placeholder, onFocus, onBlur, inputImage, inputTimeImage, onTimeInputFocus, onTimeInputBlur } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (<div className={`${prefixCls}-input-wrap`}>
       <div className={classnames(`${prefixCls}-date-input-wrap`, {'input-image': !!inputImage})}>
-        {inputImage ? <div>{inputImage}</div> : null}
-        <input
-          ref={this.saveDateInput}
-          className={`${prefixCls}-input ${invalidClass}`}
-          value={str}
-          disabled={props.disabled}
-          placeholder={placeholder}
-          onChange={this.onInputChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
+        <div className={`${prefixCls}-input-date-container`}>
+          {inputImage ? <div>{inputImage}</div> : null}
+          <input
+            ref={this.saveDateInput}
+            className={`${prefixCls}-input ${prefixCls}-input-date ${invalidClass}`}
+            value={str}
+            disabled={props.disabled}
+            placeholder={placeholder}
+            onChange={this.onInputChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+        </div>
+        <div className={`${prefixCls}-input-time-container`}>
+          {inputTimeImage ? <div>{inputTimeImage}</div> : null}
+          <TimeInput
+            initTime={props.value.format("HH:mm")}
+            className={`${prefixCls}-input ${prefixCls}-input-time ${invalidClass}`}
+            onTimeChange={this.onTimeChange}
+            onFocusHandler={onTimeInputFocus}
+            onBlurHandler={onTimeInputBlur}
+          />
+        </div>
       </div>
       {props.showClear ? <a
         className={`${prefixCls}-clear-btn`}
