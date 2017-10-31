@@ -116,7 +116,7 @@ export default class DateRangePicker extends React.Component {
     super();
 
     this.state = {
-        value: [],
+        value: [now.startOf('day'), now.clone().endOf('day')],
         hoverValue: [],
     }
   }
@@ -135,9 +135,10 @@ export default class DateRangePicker extends React.Component {
       <RangeCalendar
         prevButton={"<Test"}
         nextButton={">Test"}
+        defaultSelectedValue={state.value}
+        // value={state.value}
         showWeekNumber={false}
         dateInputPlaceholder={['start', 'end']}
-        defaultValue={[now, now.clone().add(1, 'months')]}
         locale={enUS}
         disabledTime={disabledTime}
         timePicker={timePickerElement}

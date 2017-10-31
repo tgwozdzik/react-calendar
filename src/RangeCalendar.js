@@ -64,6 +64,7 @@ function onInputSelect(direction, value) {
   if (selectedValue[0] && this.compare(selectedValue[0], selectedValue[1]) > 0) {
     selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
+
   this.fireSelectValueChange(selectedValue);
 }
 

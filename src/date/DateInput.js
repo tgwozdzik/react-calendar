@@ -26,6 +26,7 @@ const DateInput = createReactClass({
     const selectedValue = this.props.selectedValue;
     return {
       str: selectedValue && selectedValue.format(this.props.format) || '',
+      str_time: selectedValue && selectedValue.format("HH:mm") || '',
       invalid: false,
     };
   },
@@ -33,21 +34,25 @@ const DateInput = createReactClass({
   componentWillReceiveProps(nextProps) {
     // when popup show, click body will call this, bug!
     const selectedValue = nextProps.selectedValue;
+
     this.setState({
       str: selectedValue && selectedValue.format(nextProps.format) || '',
+      str_time: selectedValue && selectedValue.format("HH:mm") || '',
       invalid: false,
     });
   },
 
   onInputChange(event) {
     const str = event.target.value;
+    const str_time = this.state.str_time;
     this.setState({
-      str,
+      str
     });
     let value;
     const { disabledDate, format, onChange } = this.props;
-    if (str) {
+    if (str && str_time) {
       const parsed = moment(str, format, true);
+      const parsedTime = moment(str_time, "HH:mm");
       if (!parsed.isValid()) {
         this.setState({
           invalid: true,
@@ -59,9 +64,9 @@ const DateInput = createReactClass({
         .year(parsed.year())
         .month(parsed.month())
         .date(parsed.date())
-        .hour(parsed.hour())
-        .minute(parsed.minute())
-        .second(parsed.second());
+        .hour(parsedTime.hour())
+        .minute(parsedTime.minute())
+        .second(0);
 
       if (value && (!disabledDate || !disabledDate(value))) {
         const originalValue = this.props.selectedValue;
@@ -110,11 +115,22 @@ const DateInput = createReactClass({
   onTimeChange(newTime) {
     const {props} = this;
 
-    if(props.value.format("HH:mm") === newTime) return;
+    const dateValue = props.selectedValue || props.value;
 
-    props.onChange(
-      moment(props.value.format("YYYY-MM-DD") + " " + (newTime || '00:00'), "YYYY-MM-DD HH:mm")
-    );
+    if(dateValue.format("HH:mm") === newTime) return;
+
+    const time = moment(newTime || '00:00', "HH:mm");
+    const value = dateValue.clone();
+    value
+      .hour(time.hour())
+      .minute(time.minute())
+      .second(0);
+
+    this.setState({
+      str_time: newTime
+    });
+
+    props.onChange(value);
   },
 
   render() {
@@ -122,6 +138,7 @@ const DateInput = createReactClass({
     const { invalid, str } = this.state;
     const { locale, prefixCls, placeholder, onFocus, onBlur, inputImage, inputTimeImage, onTimeInputFocus, onTimeInputBlur } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
+
     return (<div className={`${prefixCls}-input-wrap`}>
       <div className={classnames(`${prefixCls}-date-input-wrap`, {'input-image': !!inputImage})}>
         <div className={`${prefixCls}-input-date-container`}>
@@ -140,7 +157,7 @@ const DateInput = createReactClass({
         <div className={`${prefixCls}-input-time-container`}>
           {inputTimeImage ? <div>{inputTimeImage}</div> : null}
           <TimeInput
-            initTime={props.value.format("HH:mm")}
+            initTime={this.state.str_time}
             className={`${prefixCls}-input ${prefixCls}-input-time ${invalidClass}`}
             onTimeChange={this.onTimeChange}
             onFocusHandler={onTimeInputFocus}
